@@ -12,27 +12,29 @@ const darkTheme = createTheme({
 });
 
 export default function App() {
-  const fetchTasks = async () =>{
+  const [tasks, setTasks] = useState([]);
+
+  const fetchTasks = async () => {
     try {
-      const {data} = await axios.get(API_URL);
+      const { data } = await axios.get(API_URL);
       setTasks(data);
     } catch (err) {
-      console.log(ee)
+      console.log(err);
     }
-  }
-  useEffect(()=>{
+  };
+
+  useEffect(() => {
     fetchTasks();
-  },[]);
-  const [tasks,setTasks] = useState([])
+  }, []);
+
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
-      <AddTaskForm fetchTasks={fetchTasks}/>
-      {tasks.map((task) =>{
-        <Task task={task} key={task.id} fetchTasks={fetchTasks}/>
-      })}
+      <AddTaskForm fetchTasks={fetchTasks} />
+      {tasks.map((task) => (
+        <Task task={task} key={task.id} fetchTasks={fetchTasks} />
+      ))}
     </ThemeProvider>
   );
 }
-
 

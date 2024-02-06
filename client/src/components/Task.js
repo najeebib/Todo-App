@@ -12,6 +12,7 @@ const Task = ({ task, fetchTasks }) => {
     const {id, name, completed} = task;
     const [isComplete,setIsComplete] = useState(completed);
     const [isDialogOpen, setIsDialogOpen]  = useState(false);
+
     const handleUpdateTaskCompletion = async () => {
         try {
             await axios.put(API_URL,{
@@ -25,6 +26,7 @@ const Task = ({ task, fetchTasks }) => {
         }
         
     }
+    
     const handleDeleteTask = async () =>{
         try {
             await axios.delete(`${API_URL}/${task.id}}`);
