@@ -2,11 +2,21 @@ import React, { useState } from 'react'
 import TextField from '@mui/material/TextField';
 import { Button, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-
-const AddTaskForm = () => {
+import axios from 'axios';
+import { API_URL } from '../utils';
+const AddTaskForm = ({ fetchTasks }) => {
     const [NewTask, setNewTask] = useState("")
-    const addNewTask = () =>{
-        console.log("add new task")
+    const addNewTask = async () =>{
+        try {
+            await axios.post(API_URL,{
+                name: NewTask,
+                completed: false
+            });
+            await fetchTasks();
+            setNewTask("")
+        } catch (error) {
+            console.log(error);
+        }
     }
     return (
         <div>
