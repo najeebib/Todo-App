@@ -29,7 +29,7 @@ const Task = ({ task, fetchTasks }) => {
     
     const handleDeleteTask = async () =>{
         try {
-            await axios.delete(`${API_URL}/${task.id}}`);
+            await axios.delete(`${API_URL}/${task.id}`);
             await fetchTasks();
         } catch (error) {
             console.log(error);
